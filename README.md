@@ -20,6 +20,7 @@ optional arguments:
                         keep the last n number of image tags (by reverse
                         alphanumerical order); defaults to 5
   -d, --debug           Turn on debugging mode
+  -v, --version         show program's version number and exit
   ```
 
 ## Note

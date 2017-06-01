@@ -4,6 +4,9 @@ import sys
 import requests
 from enum import Enum
 
+__version_info__ = ('17', '06', '1')
+__version__ = '.'.join(__version_info__)
+
 def main():
 
     def check_positive(value):
@@ -18,6 +21,7 @@ def main():
     parser.add_argument('-p', '--password', required=True, type=str, help="password for Harbor user")
     parser.add_argument('-c', '--preserve-count', type=check_positive, help="keep the last n number of image tags (by reverse alphanumerical order); defaults to 5", default=5)
     parser.add_argument('-d', '--debug', action='store_true', help="Turn on debugging mode")
+    parser.add_argument('-v', '--version', action='version', version='{version}'.format(version=__version__))
     parser.add_argument('project', type=str, help="name of the project")
     args = parser.parse_args()
 
