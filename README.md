@@ -21,3 +21,6 @@ optional arguments:
                         alphanumerical order); defaults to 5
   -d, --debug           Turn on debugging mode
   ```
+
+## Note
+This tool only works against v0.5.0 of Harbor
