@@ -1,5 +1,12 @@
 # harbor-cleanup
-Automated script to delete tags from a Harbor registry
+Automated script to delete tags from a [Harbor](https://github.com/vmware/harbor) registry
+
+## Binaries
+Binaries are available for Linux, OS X, and Windows. Refer to the latest [release](https://github.com/cavemandaveman/harbor-cleanup/releases).
+
+## Building
+*   Run `pip install -r requirements.txt`
+*   Run `pyinstaller -F harbor-cleanup.py` to create `./dist/harbor-cleanup`
 
 ## Usage
 ```
@@ -24,4 +31,5 @@ optional arguments:
   ```
 
 ## Note
-This tool only works against v0.5.0 of Harbor
+*   This tool only works against [v0.5.0](https://github.com/vmware/harbor/releases/tag/0.5.0) of Harbor
+*   This will delete images, however the images will still take up disk space until you run [Garbage Collection](https://github.com/vmware/harbor/blob/master/docs/user_guide.md#deleting-repositories)
