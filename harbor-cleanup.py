@@ -4,7 +4,7 @@ import sys
 import requests
 from enum import Enum
 
-__version_info__ = ('17', '06', '1')
+__version_info__ = ('17', '06', '2')
 __version__ = '.'.join(__version_info__)
 
 def main():
@@ -15,9 +15,8 @@ def main():
             raise argparse.ArgumentTypeError("%s is an invalid positive int value" % value)
         return ivalue
 
-    parser = argparse.ArgumentParser(prog='harbor-cleanup', description="Cleans up images in a Harbor project.")
+    parser = argparse.ArgumentParser(prog='harbor-cleanup', version='%(prog)s version '+__version__, description="Cleans up images in a Harbor project.")
     req_grp = parser.add_argument_group(title='required arguments')
-    parser.add_argument('-v', '--version', action='version', version='{version}'.format(version=__version__))
     parser.add_argument('-d', '--debug', action='store_true', help="turn on debugging mode")
     parser.add_argument('-q', '--quiet', action='store_true', help="suppress console output")
     req_grp.add_argument('-i', '--url', required=True, type=str, help="URL of the Harbor instance")
@@ -27,6 +26,7 @@ def main():
     parser.add_argument('project', type=str, help="name of the Harbor project to clean")
 
     if len(sys.argv[1:])==0:
+        parser.print_version()
         parser.print_help()
         parser.exit()
 
