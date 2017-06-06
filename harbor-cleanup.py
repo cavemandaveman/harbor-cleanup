@@ -23,6 +23,11 @@ def main():
     parser.add_argument('-d', '--debug', action='store_true', help="Turn on debugging mode")
     parser.add_argument('-v', '--version', action='version', version='{version}'.format(version=__version__))
     parser.add_argument('project', type=str, help="name of the project")
+
+    if len(sys.argv[1:])==0:
+        parser.print_help()
+        parser.exit()
+        
     args = parser.parse_args()
 
     LOG_LEVEL = logging.INFO
