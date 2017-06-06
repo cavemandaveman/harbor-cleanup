@@ -18,7 +18,8 @@ def main():
     parser = argparse.ArgumentParser(prog='harbor-cleanup', description="Cleans up images in a Harbor project.")
     req_grp = parser.add_argument_group(title='required arguments')
     parser.add_argument('-v', '--version', action='version', version='{version}'.format(version=__version__))
-    parser.add_argument('-d', '--debug', action='store_true', help="Turn on debugging mode")
+    parser.add_argument('-d', '--debug', action='store_true', help="turn on debugging mode")
+    parser.add_argument('-q', '--quiet', action='store_true', help="suppress console output")
     req_grp.add_argument('-i', '--url', required=True, type=str, help="URL of the Harbor instance")
     req_grp.add_argument('-u', '--user', required=True, type=str, help="valid Harbor user with proper access")
     req_grp.add_argument('-p', '--password', required=True, type=str, help="password for Harbor user")
@@ -33,7 +34,9 @@ def main():
 
     LOG_LEVEL = logging.INFO
     if args.debug:
-        LOG_LEVEL=logging.DEBUG
+        LOG_LEVEL = logging.DEBUG
+    elif args.quiet:
+        LOG_LEVEL = logging.CRITICAL
 
     logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s : %(message)s', level=LOG_LEVEL)
     logger = logging.getLogger(__name__)

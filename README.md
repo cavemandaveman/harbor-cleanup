@@ -10,7 +10,7 @@ Binaries are available for Linux, OS X, and Windows. Refer to the latest [releas
 
 ## Usage
 ```
-usage: harbor-cleanup [-h] [-v] [-d] -i URL -u USER -p PASSWORD
+usage: harbor-cleanup [-h] [-v] [-d] [-q] -i URL -u USER -p PASSWORD
                       [-c PRESERVE_COUNT]
                       project
 
@@ -22,7 +22,8 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -v, --version         show program's version number and exit
-  -d, --debug           Turn on debugging mode
+  -d, --debug           turn on debugging mode
+  -q, --quiet           suppress console output
   -c PRESERVE_COUNT, --preserve-count PRESERVE_COUNT
                         keep the last n number of image tags (by reverse
                         alphanumerical order); defaults to 5
