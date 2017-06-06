@@ -10,24 +10,28 @@ Binaries are available for Linux, OS X, and Windows. Refer to the latest [releas
 
 ## Usage
 ```
-usage: harbor-cleanup [options] project
+usage: harbor-cleanup [-h] [-v] [-d] -i URL -u USER -p PASSWORD
+                      [-c PRESERVE_COUNT]
+                      project
 
 Cleans up images in a Harbor project.
 
 positional arguments:
-  project               name of the project
+  project               name of the Harbor project to clean
 
 optional arguments:
   -h, --help            show this help message and exit
+  -v, --version         show program's version number and exit
+  -d, --debug           Turn on debugging mode
+  -c PRESERVE_COUNT, --preserve-count PRESERVE_COUNT
+                        keep the last n number of image tags (by reverse
+                        alphanumerical order); defaults to 5
+
+required arguments:
   -i URL, --url URL     URL of the Harbor instance
   -u USER, --user USER  valid Harbor user with proper access
   -p PASSWORD, --password PASSWORD
                         password for Harbor user
-  -c PRESERVE_COUNT, --preserve-count PRESERVE_COUNT
-                        keep the last n number of image tags (by reverse
-                        alphanumerical order); defaults to 5
-  -d, --debug           Turn on debugging mode
-  -v, --version         show program's version number and exit
   ```
 
 ## Note

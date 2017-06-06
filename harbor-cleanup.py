@@ -15,19 +15,20 @@ def main():
             raise argparse.ArgumentTypeError("%s is an invalid positive int value" % value)
         return ivalue
 
-    parser = argparse.ArgumentParser(prog='harbor-cleanup', usage='%(prog)s [options] project', description="Cleans up images in a Harbor project.")
-    parser.add_argument('-i', '--url', required=True, type=str, help="URL of the Harbor instance")
-    parser.add_argument('-u', '--user', required=True, type=str, help="valid Harbor user with proper access")
-    parser.add_argument('-p', '--password', required=True, type=str, help="password for Harbor user")
-    parser.add_argument('-c', '--preserve-count', type=check_positive, help="keep the last n number of image tags (by reverse alphanumerical order); defaults to 5", default=5)
-    parser.add_argument('-d', '--debug', action='store_true', help="Turn on debugging mode")
+    parser = argparse.ArgumentParser(prog='harbor-cleanup', description="Cleans up images in a Harbor project.")
+    req_grp = parser.add_argument_group(title='required arguments')
     parser.add_argument('-v', '--version', action='version', version='{version}'.format(version=__version__))
-    parser.add_argument('project', type=str, help="name of the project")
+    parser.add_argument('-d', '--debug', action='store_true', help="Turn on debugging mode")
+    req_grp.add_argument('-i', '--url', required=True, type=str, help="URL of the Harbor instance")
+    req_grp.add_argument('-u', '--user', required=True, type=str, help="valid Harbor user with proper access")
+    req_grp.add_argument('-p', '--password', required=True, type=str, help="password for Harbor user")
+    parser.add_argument('-c', '--preserve-count', type=check_positive, help="keep the last n number of image tags (by reverse alphanumerical order); defaults to 5", default=5)
+    parser.add_argument('project', type=str, help="name of the Harbor project to clean")
 
     if len(sys.argv[1:])==0:
         parser.print_help()
         parser.exit()
-        
+
     args = parser.parse_args()
 
     LOG_LEVEL = logging.INFO
