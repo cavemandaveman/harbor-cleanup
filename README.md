@@ -24,6 +24,7 @@ optional arguments:
   -v, --version         show program's version number and exit
   -d, --debug           turn on debugging mode
   -q, --quiet           suppress console output
+  -n, --dry-run         only print out image tags, do not do actual deletion
   -c PRESERVE_COUNT, --preserve-count PRESERVE_COUNT
                         keep the last n number of image tags (by reverse
                         alphanumerical order); defaults to 5

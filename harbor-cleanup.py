@@ -19,6 +19,7 @@ def main():
     req_grp = parser.add_argument_group(title='required arguments')
     parser.add_argument('-d', '--debug', action='store_true', help="turn on debugging mode")
     parser.add_argument('-q', '--quiet', action='store_true', help="suppress console output")
+    parser.add_argument('-n', '--dry-run', action='store_true', help="only print out image tags, do not do actual deletion")
     req_grp.add_argument('-i', '--url', required=True, type=str, help="URL of the Harbor instance")
     req_grp.add_argument('-u', '--user', required=True, type=str, help="valid Harbor user with proper access")
     req_grp.add_argument('-p', '--password', required=True, type=str, help="password for Harbor user")
@@ -88,8 +89,11 @@ def main():
         return tags
 
     def delete_tag(image, tag):
-        logger.info('Deleting %s:%s', image, tag)
-        return_json(Method.DELETE, HARBOR_URL+'/api/repositories?repo_name='+image+'&tag='+tag)
+        if args.dry_run:
+            logger.info('Would have deleted %s:%s', image, tag)
+        else:
+            logger.info('Deleting %s:%s', image, tag)
+            return_json(Method.DELETE, HARBOR_URL+'/api/repositories?repo_name='+image+'&tag='+tag)
 
     PROJECT_ID = get_project_id_by_project_name(PROJECT_NAME)
     IMAGES = get_images_in_project(PROJECT_ID)
